@@ -109,17 +109,17 @@ class VirtualProduct extends Product {
   }
 }
 
-try {
-  const productBasic = new Product("Brochure", 0, "uah", 1000);
-  const productPhysical = new PhysicalProduct("Phone", 200, "eur", 25, 0.2);
-  const productVirtual = new VirtualProduct("Cloud", 10, "usd", 100, 15);
-  console.log(productVirtual.buy(99));
-  console.log(productPhysical.info);
-  console.log(productVirtual.info);
-  console.log(productBasic.info);
-} catch (error) {
-  console.log(error);
-}
+// try {
+//   const productBasic = new Product("Brochure", 0, "uah", 1000);
+//   const productPhysical = new PhysicalProduct("Phone", 200, "eur", 25, 0.2);
+//   const productVirtual = new VirtualProduct("Cloud", 10, "usd", 100, 15);
+//   console.log(productVirtual.buy(99));
+//   console.log(productPhysical.info);
+//   console.log(productVirtual.info);
+//   console.log(productBasic.info);
+// } catch (error) {
+//   console.log(error);
+// }
 
 const COLORS = ["red", "gray", "colorfull"];
 const MAX_DIST_FLY = 90;
@@ -204,12 +204,12 @@ class MagicSquirell extends FlySquirell {
   }
 }
 
-try {
-  const words = ["qwe1", "", "qwe2", 54, " ", "qwe3"];
-  const magic1 = new MagicSquirell("Belka", "red", 60, words);
-  magic1.speak;
-  console.log(magic1.fly(1));
-  console.log(magic1.jump);
-} catch (error) {
-  console.log(error);
-}
+// try {
+//   const words = ["qwe1", "", "qwe2", 54, " ", "qwe3"];
+//   const magic1 = new MagicSquirell("Belka", "red", 60, words);
+//   magic1.speak;
+//   console.log(magic1.fly(1));
+//   console.log(magic1.jump);
+// } catch (error) {
+//   console.log(error);
+// }

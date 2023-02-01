@@ -45,15 +45,15 @@ class RangeValidator {
   }
 }
 
-try {
-  const validator1 = new RangeValidator();
-  console.log(validator1.from + " " + validator1.to);
-  validator1.to = 1;
-  console.log(validator1.range);
-  console.log(validator1.validate(-1));
-  console.log(validator1.validate(0));
-  console.log(validator1.validate(1));
-  console.log(validator1.validate(2));
-} catch (error) {
-  console.log(error);
-}
+// try {
+//   const validator1 = new RangeValidator();
+//   console.log(validator1.from + " " + validator1.to);
+//   validator1.to = 1;
+//   console.log(validator1.range);
+//   console.log(validator1.validate(-1));
+//   console.log(validator1.validate(0));
+//   console.log(validator1.validate(1));
+//   console.log(validator1.validate(2));
+// } catch (error) {
+//   console.log(error);
+// }
