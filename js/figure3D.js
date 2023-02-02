@@ -30,6 +30,9 @@ function showVolume3DFigure(figure3D) {
 }
 class Figure3D {
   constructor(name) {
+    if (this.constructor === Figure3D) {
+      throw new Error("not create insstance from Figure3D");
+    }
     this.name = name;
   }
   calculateVolume() {}
@@ -87,6 +90,11 @@ try {
   console.log(showVolume3DFigure(figureSphere));
   console.log(showVolume3DFigure(figureCube));
   console.log(showVolume3DFigure(figureCylinder));
+} catch (error) {
+  console.log(error);
+}
+try {
+  const test = new Figure3D();
 } catch (error) {
   console.log(error);
 }
