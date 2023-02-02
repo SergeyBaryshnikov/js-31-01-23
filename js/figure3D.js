@@ -10,7 +10,7 @@
 
 // Створити функцію showVolume3DFigure, яка приймає об'єкт і повертає рядок виду "[назва фигури] has volume: [значення об'єму].
 
-function isNumRange(
+function throwingExceptions(
   value,
   from = Number.MIN_SAFE_INTEGER,
   to = Number.MAX_SAFE_INTEGER
@@ -21,9 +21,8 @@ function isNumRange(
     throw new RangeError(
       "value must be greater than " + from + " and less than " + to
     );
-  return true;
 }
-function ShowVolume3DFigure(figure3D) {
+function showVolume3DFigure(figure3D) {
   if (figure3D instanceof Figure3D) {
     console.log(figure3D.name + " has volume = ", figure3D.calculateVolume());
     return;
@@ -45,7 +44,7 @@ class Sphere extends Figure3D {
     return this._radius;
   }
   set radius(value) {
-    isNumRange(value, 0);
+    throwingExceptions(value, 0);
     this._radius = value;
   }
   calculateVolume() {
@@ -61,7 +60,7 @@ class Cube extends Figure3D {
     return this._side;
   }
   set side(value) {
-    isNumRange(value, 0);
+    throwingExceptions(value, 0);
     this._side = value;
   }
   calculateVolume() {
@@ -78,14 +77,14 @@ class Cylinder extends Figure3D {
     return this._height;
   }
   set height(value) {
-    isNumRange(value, 0);
+    throwingExceptions(value, 0);
     this._height = value;
   }
   get radius() {
     return this._radius;
   }
   set radius(value) {
-    isNumRange(value, 0);
+    throwingExceptions(value, 0);
     this._radius = value;
   }
   calculateVolume() {
@@ -96,14 +95,14 @@ try {
   const figureSphere = new Sphere(10);
   const figureCube = new Cube(10);
   const figureCylinder = new Cylinder(10, 10);
-  ShowVolume3DFigure(figureSphere);
-  ShowVolume3DFigure(figureCube);
-  ShowVolume3DFigure(figureCylinder);
+  showVolume3DFigure(figureSphere);
+  showVolume3DFigure(figureCube);
+  showVolume3DFigure(figureCylinder);
 } catch (error) {
   console.log(error);
 }
 ////////////////////////////////////////////////////////////////////
-function LogPerimetrFigure(figure) {
+function logPerimetrFigure(figure) {
   if (figure instanceof Figure) {
     console.log(figure.name + " perimetr = ", figure.getPerimetr());
     return;
@@ -129,7 +128,7 @@ class Circle extends Figure {
     return this._radius;
   }
   set radius(value) {
-    isNumRange(value, 0);
+    throwingExceptions(value, 0);
     this._radius = value;
   }
   getPerimetr() {
@@ -148,7 +147,7 @@ class Square extends Figure {
     return this._side;
   }
   set side(value) {
-    isNumRange(value, 0);
+    throwingExceptions(value, 0);
     this._side = value;
   }
   getPerimetr() {
@@ -169,7 +168,7 @@ class Triangular extends Figure {
     return this._side1;
   }
   set side1(value) {
-    isNumRange(value, 0);
+    throwingExceptions(value, 0);
     if (value >= this._side2 + this._side3) {
       throw new RangeError("value must be < " + (this._side2 + this._side3));
     }
@@ -179,7 +178,7 @@ class Triangular extends Figure {
     return this._side2;
   }
   set side2(value) {
-    isNumRange(value, 0);
+    throwingExceptions(value, 0);
     if (value >= this._side3 + this._side1) {
       throw new RangeError("value must be < " + (this._side3 + this._side1));
     }
@@ -189,7 +188,7 @@ class Triangular extends Figure {
     return this._side3;
   }
   set side3(value) {
-    isNumRange(value, 0);
+    throwingExceptions(value, 0);
     if (value >= this._side2 + this._side1) {
       throw new RangeError("value must be < " + (this._side2 + this._side1));
     }
@@ -212,7 +211,7 @@ try {
   console.log(figure1.getArea());
   console.log(figure2.getArea());
   console.log(figure3.getArea());
-  LogPerimetrFigure(figure1);
+  logPerimetrFigure(figure1);
   const figure4 = new Figure();
 } catch (error) {
   console.log(error);
