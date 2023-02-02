@@ -10,6 +10,19 @@
 
 // Створити функцію showVolume3DFigure, яка приймає об'єкт і повертає рядок виду "[назва фигури] has volume: [значення об'єму].
 
+function isNumRange(
+  value,
+  from = Number.MIN_SAFE_INTEGER,
+  to = Number.MAX_SAFE_INTEGER
+) {
+  if (Number.isFinite(value) === false)
+    throw new TypeError("value must be number");
+  if (value <= from || value >= to)
+    throw new RangeError(
+      "value must be greater than " + from + " and less than " + to
+    );
+  return true;
+}
 function ShowVolume3DFigure(figure3D) {
   if (figure3D instanceof Figure3D) {
     console.log(figure3D.name + " has volume = ", figure3D.calculateVolume());
@@ -32,12 +45,7 @@ class Sphere extends Figure3D {
     return this._radius;
   }
   set radius(value) {
-    if (typeof value !== "number") {
-      throw new TypeError("value must be number");
-    }
-    if (value <= 0) {
-      throw new RangeError("value must be positive");
-    }
+    isNumRange(value, 0);
     this._radius = value;
   }
   calculateVolume() {
@@ -53,12 +61,7 @@ class Cube extends Figure3D {
     return this._side;
   }
   set side(value) {
-    if (typeof value !== "number") {
-      throw new TypeError("value must be number");
-    }
-    if (value <= 0) {
-      throw new RangeError("value must be positive");
-    }
+    isNumRange(value, 0);
     this._side = value;
   }
   calculateVolume() {
@@ -75,24 +78,14 @@ class Cylinder extends Figure3D {
     return this._height;
   }
   set height(value) {
-    if (typeof value !== "number") {
-      throw new TypeError("value must be number");
-    }
-    if (value <= 0) {
-      throw new RangeError("value must be positive");
-    }
+    isNumRange(value, 0);
     this._height = value;
   }
   get radius() {
     return this._radius;
   }
   set radius(value) {
-    if (typeof value !== "number") {
-      throw new TypeError("value must be number");
-    }
-    if (value <= 0) {
-      throw new RangeError("value must be positive");
-    }
+    isNumRange(value, 0);
     this._radius = value;
   }
   calculateVolume() {
@@ -109,7 +102,7 @@ try {
 } catch (error) {
   console.log(error);
 }
-
+////////////////////////////////////////////////////////////////////
 function LogPerimetrFigure(figure) {
   if (figure instanceof Figure) {
     console.log(figure.name + " perimetr = ", figure.getPerimetr());
@@ -136,12 +129,7 @@ class Circle extends Figure {
     return this._radius;
   }
   set radius(value) {
-    if (typeof value !== "number") {
-      throw new TypeError("value must be number");
-    }
-    if (value <= 0) {
-      throw new RangeError("value must be positive");
-    }
+    isNumRange(value, 0);
     this._radius = value;
   }
   getPerimetr() {
@@ -160,12 +148,7 @@ class Square extends Figure {
     return this._side;
   }
   set side(value) {
-    if (typeof value !== "number") {
-      throw new TypeError("value must be number");
-    }
-    if (value <= 0) {
-      throw new RangeError("value must be positive");
-    }
+    isNumRange(value, 0);
     this._side = value;
   }
   getPerimetr() {
@@ -186,12 +169,7 @@ class Triangular extends Figure {
     return this._side1;
   }
   set side1(value) {
-    if (typeof value !== "number") {
-      throw new TypeError("value must be number");
-    }
-    if (value <= 0) {
-      throw new RangeError("value must be positive");
-    }
+    isNumRange(value, 0);
     if (value >= this._side2 + this._side3) {
       throw new RangeError("value must be < " + (this._side2 + this._side3));
     }
@@ -201,12 +179,7 @@ class Triangular extends Figure {
     return this._side2;
   }
   set side2(value) {
-    if (typeof value !== "number") {
-      throw new TypeError("value must be number");
-    }
-    if (value <= 0) {
-      throw new RangeError("value must be positive");
-    }
+    isNumRange(value, 0);
     if (value >= this._side3 + this._side1) {
       throw new RangeError("value must be < " + (this._side3 + this._side1));
     }
@@ -216,12 +189,7 @@ class Triangular extends Figure {
     return this._side3;
   }
   set side3(value) {
-    if (typeof value !== "number") {
-      throw new TypeError("value must be number");
-    }
-    if (value <= 0) {
-      throw new RangeError("value must be positive");
-    }
+    isNumRange(value, 0);
     if (value >= this._side2 + this._side1) {
       throw new RangeError("value must be < " + (this._side2 + this._side1));
     }
@@ -234,18 +202,18 @@ class Triangular extends Figure {
     return "formula Gerona";
   }
 }
-// try {
-//   const figure1 = new Circle(10);
-//   const figure2 = new Square(10);
-//   const figure3 = new Triangular(10, 10, 10);
-//   console.log(figure1.getPerimetr());
-//   console.log(figure2.getPerimetr());
-//   console.log(figure3.getPerimetr());
-//   console.log(figure1.getArea());
-//   console.log(figure2.getArea());
-//   console.log(figure3.getArea());
-//   LogPerimetrFigure(figure1);
-//   const figure4 = new Figure();
-// } catch (error) {
-//   console.log(error);
-// }
+try {
+  const figure1 = new Circle(10);
+  const figure2 = new Square(10);
+  const figure3 = new Triangular(10, 10, 10);
+  console.log(figure1.getPerimetr());
+  console.log(figure2.getPerimetr());
+  console.log(figure3.getPerimetr());
+  console.log(figure1.getArea());
+  console.log(figure2.getArea());
+  console.log(figure3.getArea());
+  LogPerimetrFigure(figure1);
+  const figure4 = new Figure();
+} catch (error) {
+  console.log(error);
+}
