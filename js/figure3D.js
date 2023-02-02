@@ -10,7 +10,7 @@
 
 // Створити функцію showVolume3DFigure, яка приймає об'єкт і повертає рядок виду "[назва фигури] has volume: [значення об'єму].
 
-function throwingExceptions(
+function isNumOfRange(
   value,
   from = Number.MIN_SAFE_INTEGER,
   to = Number.MAX_SAFE_INTEGER
@@ -21,12 +21,11 @@ function throwingExceptions(
     throw new RangeError(
       "value must be greater than " + from + " and less than " + to
     );
+  return true;
 }
 function showVolume3DFigure(figure3D) {
-  if (figure3D instanceof Figure3D) {
-    console.log(figure3D.name + " has volume = ", figure3D.calculateVolume());
-    return;
-  }
+  if (figure3D instanceof Figure3D)
+    return `${figure3D.name} has volume = ${figure3D.calculateVolume()}`;
   throw new TypeError("instance must be extends Figure3D");
 }
 class Figure3D {
@@ -44,12 +43,9 @@ class Sphere extends Figure3D {
     return this._radius;
   }
   set radius(value) {
-    throwingExceptions(value, 0);
-    this._radius = value;
+    if (isNumOfRange(value, 0)) this._radius = value;
   }
-  calculateVolume() {
-    return (4 * Math.PI * Math.pow(this._radius, 3)) / 3;
-  }
+  calculateVolume = () => (4 * Math.PI * Math.pow(this._radius, 3)) / 3;
 }
 class Cube extends Figure3D {
   constructor(side) {
@@ -60,12 +56,9 @@ class Cube extends Figure3D {
     return this._side;
   }
   set side(value) {
-    throwingExceptions(value, 0);
-    this._side = value;
+    if (isNumOfRange(value, 0)) this._side = value;
   }
-  calculateVolume() {
-    return this._side * this._side * this._side;
-  }
+  calculateVolume = () => this._side * this._side * this._side;
 }
 class Cylinder extends Figure3D {
   constructor(height, radius) {
@@ -77,27 +70,23 @@ class Cylinder extends Figure3D {
     return this._height;
   }
   set height(value) {
-    throwingExceptions(value, 0);
-    this._height = value;
+    if (isNumOfRange(value, 0)) this._height = value;
   }
   get radius() {
     return this._radius;
   }
   set radius(value) {
-    throwingExceptions(value, 0);
-    this._radius = value;
+    if (isNumOfRange(value, 0)) this._radius = value;
   }
-  calculateVolume() {
-    return Math.PI * Math.pow(this._radius, 2) * this._height;
-  }
+  calculateVolume = () => Math.PI * Math.pow(this._radius, 2) * this._height;
 }
 try {
   const figureSphere = new Sphere(10);
   const figureCube = new Cube(10);
   const figureCylinder = new Cylinder(10, 10);
-  showVolume3DFigure(figureSphere);
-  showVolume3DFigure(figureCube);
-  showVolume3DFigure(figureCylinder);
+  console.log(showVolume3DFigure(figureSphere));
+  console.log(showVolume3DFigure(figureCube));
+  console.log(showVolume3DFigure(figureCylinder));
 } catch (error) {
   console.log(error);
 }
@@ -128,15 +117,10 @@ class Circle extends Figure {
     return this._radius;
   }
   set radius(value) {
-    throwingExceptions(value, 0);
-    this._radius = value;
+    if (isNumOfRange(value, 0)) this._radius = value;
   }
-  getPerimetr() {
-    return 2 * Math.PI * this._radius;
-  }
-  getArea() {
-    return Math.PI * this._radius * this._radius;
-  }
+  getPerimetr = () => 2 * Math.PI * this._radius;
+  getArea = () => Math.PI * this._radius * this._radius;
 }
 class Square extends Figure {
   constructor(side) {
@@ -147,15 +131,10 @@ class Square extends Figure {
     return this._side;
   }
   set side(value) {
-    throwingExceptions(value, 0);
-    this._side = value;
+    if (isNumOfRange(value, 0)) this._side = value;
   }
-  getPerimetr() {
-    return this._side * 4;
-  }
-  getArea() {
-    return this._side * this._side;
-  }
+  getPerimetr = () => this._side * 4;
+  getArea = () => this._side * this._side;
 }
 class Triangular extends Figure {
   constructor(side1, side2, side3) {
@@ -168,38 +147,37 @@ class Triangular extends Figure {
     return this._side1;
   }
   set side1(value) {
-    throwingExceptions(value, 0);
-    if (value >= this._side2 + this._side3) {
-      throw new RangeError("value must be < " + (this._side2 + this._side3));
+    if (isNumOfRange(value, 0)) {
+      if (value >= this._side2 + this._side3) {
+        throw new RangeError("value must be < " + (this._side2 + this._side3));
+      }
+      this._side1 = value;
     }
-    this._side1 = value;
   }
   get side2() {
     return this._side2;
   }
   set side2(value) {
-    throwingExceptions(value, 0);
-    if (value >= this._side3 + this._side1) {
-      throw new RangeError("value must be < " + (this._side3 + this._side1));
+    if (isNumOfRange(value, 0)) {
+      if (value >= this._side3 + this._side1) {
+        throw new RangeError("value must be < " + (this._side3 + this._side1));
+      }
+      this._side2 = value;
     }
-    this._side2 = value;
   }
   get side3() {
     return this._side3;
   }
   set side3(value) {
-    throwingExceptions(value, 0);
-    if (value >= this._side2 + this._side1) {
-      throw new RangeError("value must be < " + (this._side2 + this._side1));
+    if (isNumOfRange(value, 0)) {
+      if (value >= this._side2 + this._side1) {
+        throw new RangeError("value must be < " + (this._side2 + this._side1));
+      }
+      this._side3 = value;
     }
-    this._side3 = value;
   }
-  getPerimetr() {
-    return this._side1 + this._side2 + this._side3;
-  }
-  getArea() {
-    return "formula Gerona";
-  }
+  getPerimetr = () => this._side1 + this._side2 + this._side3;
+  getArea = () => "formula Gerona";
 }
 try {
   const figure1 = new Circle(10);
@@ -212,7 +190,6 @@ try {
   console.log(figure2.getArea());
   console.log(figure3.getArea());
   logPerimetrFigure(figure1);
-  const figure4 = new Figure();
 } catch (error) {
   console.log(error);
 }
