@@ -23,6 +23,12 @@ function isNumOfRange(
     );
   return true;
 }
+function isString(value) {
+  if (typeof value !== "string") throw new TypeError("value must be string");
+  if (value.trim().length === 0)
+    throw new RangeError("value length must be greater than 0");
+  return true;
+}
 function showVolume3DFigure(figure3D) {
   if (figure3D instanceof Figure3D)
     return `${figure3D.name} has volume = ${figure3D.calculateVolume()}`;
@@ -34,6 +40,12 @@ class Figure3D {
       throw new Error("not create insstance from Figure3D");
     }
     this.name = name;
+  }
+  get name() {
+    return this._name;
+  }
+  set name(value) {
+    if (isString(value)) this._name = value;
   }
   calculateVolume() {}
 }
@@ -112,6 +124,12 @@ class Figure {
       throw new Error("not create insstance from Figure");
     }
     this.name = name;
+  }
+  get name() {
+    return this._name;
+  }
+  set name(value) {
+    if (isString(value)) this._name = value;
   }
   getPerimetr() {}
   getArea() {}
