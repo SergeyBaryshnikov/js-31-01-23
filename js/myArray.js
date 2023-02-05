@@ -1,20 +1,18 @@
-// 1 variant
-// const MyArrayPrototype = {};
-// MyArrayPrototype.push = function (value) {
-//   this[this.length] = value;
-//   return ++this.length;
-// };
-
-//2 variant constructor for prototype
-function MyArrayPrototype() {
-  this.push = function () {
+class MyArray {
+  constructor() {
+    this.length = 0;
+    for (let index = 0; index < arguments.length; index++) {
+      this.push(arguments[index]);
+    }
+  }
+  push() {
     for (let index = 0; index < arguments.length; index++) {
       this[this.length++] = arguments[index];
       // this.length++;
     }
     return this.length;
-  };
-  this.pop = function () {
+  }
+  pop() {
     if (this.length === 0) {
       return;
     }
@@ -22,8 +20,8 @@ function MyArrayPrototype() {
     delete this[--this.length];
     // this.length--;
     return lastItem;
-  };
-  this.reverse = function () {
+  }
+  reverse() {
     const myArray = new MyArray();
     for (let index = this.length - 1; index >= 0; index--) {
       myArray.push(this[index]);
@@ -32,38 +30,34 @@ function MyArrayPrototype() {
       this[index] = myArray[index];
     }
     return myArray;
-  };
-  this.forEach = function (func) {
+  }
+  forEach(func) {
     for (let index = 0; index < this.length; index++) {
       func(this[index], index, this);
     }
-  };
-  this.some = function (func) {
+  }
+  some(func) {
     for (let index = 0; index < this.length; index++) {
       if (func(this[index], index, this)) {
         return true;
       }
     }
     return false;
-  };
-  this.every = function (func) {
+  }
+  every(func) {
     for (let index = 0; index < this.length; index++) {
       if (func(this[index], index, this) === false) {
         return false;
       }
     }
     return true;
-  };
-}
+  }
 
-function MyArray() {
-  this.length = 0;
-  for (let index = 0; index < arguments.length; index++) {
-    this.push(arguments[index]);
+  static isMyArray(obj) {
+    return obj instanceof MyArray;
   }
 }
 
-MyArray.prototype = new MyArrayPrototype();
 
 const myArrayNumbers1 = new MyArray(998, 999, 787);
 myArrayNumbers1.push(44, 33, 32, 56, 87);

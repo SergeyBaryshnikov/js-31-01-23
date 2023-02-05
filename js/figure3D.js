@@ -95,21 +95,21 @@ class Cylinder extends Figure3D {
   }
   calculateVolume = () => Math.PI * Math.pow(this._radius, 2) * this._height;
 }
-try {
-  const figureSphere = new Sphere(10);
-  const figureCube = new Cube(10);
-  const figureCylinder = new Cylinder(10, 10);
-  console.log(showVolume3DFigure(figureSphere));
-  console.log(showVolume3DFigure(figureCube));
-  console.log(showVolume3DFigure(figureCylinder));
-} catch (error) {
-  console.log(error);
-}
-try {
-  const test = new Figure3D();
-} catch (error) {
-  console.log(error);
-}
+// try {
+//   const figureSphere = new Sphere(10);
+//   const figureCube = new Cube(10);
+//   const figureCylinder = new Cylinder(10, 10);
+//   console.log(showVolume3DFigure(figureSphere));
+//   console.log(showVolume3DFigure(figureCube));
+//   console.log(showVolume3DFigure(figureCylinder));
+// } catch (error) {
+//   console.log(error);
+// }
+// try {
+//   const test = new Figure3D();
+// } catch (error) {
+//   console.log(error);
+// }
 ////////////////////////////////////////////////////////////////////
 function logPerimetrFigure(figure) {
   if (figure instanceof Figure) {
@@ -205,17 +205,17 @@ class Triangular extends Figure {
   getPerimetr = () => this._side1 + this._side2 + this._side3;
   getArea = () => "formula Gerona";
 }
-try {
-  const figure1 = new Circle(10);
-  const figure2 = new Square(10);
-  const figure3 = new Triangular(10, 10, 10);
-  console.log(figure1.getPerimetr());
-  console.log(figure2.getPerimetr());
-  console.log(figure3.getPerimetr());
-  console.log(figure1.getArea());
-  console.log(figure2.getArea());
-  console.log(figure3.getArea());
-  logPerimetrFigure(figure1);
-} catch (error) {
-  console.log(error);
-}
+// try {
+//   const figure1 = new Circle(10);
+//   const figure2 = new Square(10);
+//   const figure3 = new Triangular(10, 10, 10);
+//   console.log(figure1.getPerimetr());
+//   console.log(figure2.getPerimetr());
+//   console.log(figure3.getPerimetr());
+//   console.log(figure1.getArea());
+//   console.log(figure2.getArea());
+//   console.log(figure3.getArea());
+//   logPerimetrFigure(figure1);
+// } catch (error) {
+//   console.log(error);
+// }
