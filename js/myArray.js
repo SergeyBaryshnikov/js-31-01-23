@@ -1,3 +1,16 @@
+class MyArrayIterator {
+  constructor(myArrayInstance) {
+    this.collection = myArrayInstance;
+    this.currentIndex = 0;
+  }
+  next() {
+    return {
+      value: this.collection[this.currentIndex++],
+      done: this.currentIndex > this.collection.length,
+    };
+  }
+}
+
 class MyArray {
   constructor() {
     this.length = 0;
@@ -52,12 +65,45 @@ class MyArray {
     }
     return true;
   }
-
+  concat(instanceMyArray) {
+    if (MyArray.isMyArray(instanceMyArray) === false) {
+      throw new TypeError("must be instance MyArray");
+    }
+    const concatArray = new MyArray();
+    for (let i = 0; i < this.length; i++) {
+      concatArray.push(this[i]);
+    }
+    for (let i = 0; i < instanceMyArray.length; i++) {
+      concatArray.push(instanceMyArray[i]);
+    }
+    return concatArray;
+  }
+  flat(depth = 1) {
+    let result = new MyArray();
+    // for (let index = 0; index < this.length; index++) {
+    //   if (MyArray.isMyArray(this[index]) && depth) {
+    //     const subResult = this[index].flat(depth - 1);
+    //     result = result.concat(subResult);
+    //   } else if (this[index] !== undefined) {
+    //     result.push(this[index]);
+    //   }
+    // }
+    this.forEach((elem) => {
+      if (MyArray.isMyArray(elem) && depth) {
+        result = result.concat(elem.flat(depth - 1));
+      } else if (elem !== undefined) {
+        result.push(elem);
+      }
+    });
+    return result;
+  }
+  [Symbol.iterator]() {
+    return new MyArrayIterator(this);
+  }
   static isMyArray(obj) {
     return obj instanceof MyArray;
   }
 }
-
 
 const myArrayNumbers1 = new MyArray(998, 999, 787);
 myArrayNumbers1.push(44, 33, 32, 56, 87);
@@ -81,3 +127,14 @@ const array2 = array1.reverse();
 //     return elem > 5;
 //   })
 // );
+
+const myArr = new MyArray(
+  undefined,
+  10,
+  new MyArray(5, new MyArray(55, 77, 88, new MyArray(555, 757, 858)), 8),
+  30,
+  40
+);
+const newMyFlatArr = myArr.flat(2);
+// console.log(myArr);
+// console.log(newMyFlatArr);
