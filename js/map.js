@@ -10,9 +10,12 @@
 //compare('asd', 'ssaadd') ->false
 //compare('ssaadd', 'asd') ->false
 
-const createMapFromString = (srting) => {
+const createMapFromString = (string) => {
+  if (typeof string !== "string") {
+    throw new TypeError("must be string");
+  }
   const map = new Map();
-  for (const key of srting.toLowerCase()) {
+  for (const key of string.toLowerCase()) {
     if (map.has(key)) {
       map.set(key, map.get(key) + 1);
     } else {
@@ -39,6 +42,9 @@ const compare = (str1, str2) => {
 console.log(compare("asd", "Sad"));
 
 const compare2 = (str1, str2) => {
+  if (typeof str1 !== "string" || typeof str2 !== "string") {
+    throw new TypeError("must be string");
+  }
   return (
     str1.trim().toLowerCase().split("").sort().join("") ===
     str2.trim().toLowerCase().split("").sort().join("")
